@@ -57,6 +57,8 @@ function labelLayout(data) {
         var itemModel = data.getItemModel(idx);
         var labelModel = itemModel.getModel('label');
         var labelPosition = labelModel.get('position');
+        var labelRotation = labelModel.get('rotate');
+        var rotation = labelRotation && (labelRotation * Math.PI / 180);
 
         var labelLineModel = itemModel.getModel('labelLine');
 
@@ -165,7 +167,8 @@ function labelLayout(data) {
             y: textY,
             verticalAlign: 'middle',
             textAlign: textAlign,
-            inside: isLabelInside
+            inside: isLabelInside,
+            rotation: rotation,
         };
     });
 }
