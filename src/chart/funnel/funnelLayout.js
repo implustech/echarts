@@ -198,9 +198,15 @@ export default function (ecModel, api, payload) {
 
         var y = viewRect.y;
 
-        var getLinePoints = function (idx, offY) {
-            // End point index is data.count() and we assign it 0
-            var val = data.get(valueDim, idx) || 0;
+        const showFunnelVertex = seriesModel.get("showFunnelVertex");
+        const getLinePoints = function (idx, offY) {
+            var val;
+            if (idx === undefined && showFunnelVertex) {
+                val = data.get(valueDim, indices[data.count() - 1]);
+            } else {
+                // End point index is data.count() and we assign it 0
+                val = data.get(valueDim, idx) || 0;
+            }
             var itemWidth = linearMap(val, [min, max], sizeExtent, true);
             var x0;
             switch (funnelAlign) {

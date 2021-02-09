@@ -115,7 +115,8 @@ var FunnelSeries = echarts.extendSeriesModel({
             label: {
                 show: true
             }
-        }
+        },
+        showFunnelVertex: false
     }
 });
 
