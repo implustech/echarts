@@ -65,6 +65,8 @@ function labelLayout(data: List) {
         const itemModel = data.getItemModel<FunnelDataItemOption>(idx);
         const labelModel = itemModel.getModel('label');
         let labelPosition = labelModel.get('position');
+        let labelRotation = labelModel.get('rotate');
+        let rotation = labelRotation && labelRotation * Math.PI / 180;
 
         const labelLineModel = itemModel.getModel('labelLine');
 
@@ -240,7 +242,8 @@ function labelLayout(data: List) {
             y: textY,
             verticalAlign: 'middle',
             textAlign: textAlign,
-            inside: isLabelInside
+            inside: isLabelInside,
+            rotation: rotation
         };
     });
 }
