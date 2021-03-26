@@ -187,7 +187,6 @@ todo
 /echarts.simple.js
 /echarts.common.js
 /echarts.blank.js
-/lib
 /types
 /index.js
 /index.simple.js
@@ -204,3 +203,6 @@ todo
 /renderers.js
 /renderers.d.ts
 *.tgz
+
+# vscode
+.vscode
