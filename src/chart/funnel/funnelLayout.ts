@@ -280,10 +280,17 @@ export default function funnelLayout(ecModel: GlobalModel, api: ExtensionAPI) {
         const viewSize = orient === 'horizontal' ? viewWidth : viewHeight;
         let itemSize = (viewSize - gap * (data.count() - 1)) / data.count();
 
+        const showFunnelVertex = seriesModel.get("showFunnelVertex");
         const getLinePoints = function (idx: number, offset: number) {
             // End point index is data.count() and we assign it 0
+            let val;
+            if (idx === undefined && showFunnelVertex) {
+                val = data.get(valueDim, indices[data.count() - 1]) as number;
+            } else {
+                // End point index is data.count() and we assign it 0
+                val = (data.get(valueDim, idx) as number) || 0;
+            }
             if (orient === 'horizontal') {
-                const val = data.get(valueDim, idx) as number || 0;
                 const itemHeight = linearMap(val, [min, max], sizeExtent, true);
                 let y0;
                 switch (funnelAlign) {
@@ -303,7 +310,6 @@ export default function funnelLayout(ecModel: GlobalModel, api: ExtensionAPI) {
                     [offset, y0 + itemHeight]
                 ];
             }
-            const val = data.get(valueDim, idx) as number || 0;
             const itemWidth = linearMap(val, [min, max], sizeExtent, true);
             let x0;
             switch (funnelAlign) {
